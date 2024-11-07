@@ -1,6 +1,6 @@
 ---
 title: "Lab9"
-author: "Your Name"
+author: "Jack Sutton"
 date: "2024-11-07"
 output: "github_document"
 ---
@@ -13,7 +13,7 @@ library(bruceR)
 library(haven)
 
 
-lab9data<-read_sav("C:/Users/Colin/Documents/lab9data.sav")
+lab9data<-read_sav("C:/Users/ajsut/Documents/GitHub/myproject/Lab9/lab9data.sav")
 
 
 
@@ -48,20 +48,51 @@ Alpha(lab9data, "FSMI", 1:6, rev = 3)
 
 EFA(lab9data, "FSMI", 1:6, rev = 3, method = "pa", plot.scree = TRUE, nfactors = c("parallel"))
 
+
+#There's only one factor here... eigenvalue is above 1,
 ```
+#this is a pretty good scale but the reverse scored measure does not have high factor loading... (it is below .4)
+
 # Now test reliability for the status seeking subscale
 ```{r}
+#items 31-36 test status seeking (36isR)
+
+Alpha(lab9data, "FSMI", 31:36, rev = 36)
+
 
 ```
 # Q1: What is the Cronbach's alpha of this subscale? Is it a reliable measure of status seeking? Why? 
 
+Cronbach's alpha of 0.83 demonstrates good reliability for this scale. It has more than acceptable internal consistency between items in the scale.
+
 # Now run a factor analysis on the Mate Retention (Breakup Concern) subscale
 ```{r}
 
-
+EFA(lab9data, "FSMI", 49:54, method = "pa", plot.scree = TRUE, nfactors = c("parallel"))
 
 ```
 
 # Q2: How many factors can you identify from the results? Based on what? What is the range of the factor loadings? What is item that has the highest factor loading? In conclusion, is this a good measure of break up concern and why?
 
+There's only 1 factor here because the eigenvalue is above 1, its point is on the slope not the the scree/flat part, and it is above the parallel. The range of the loadings are 0.940 - 0.823. The item with the highest loading is item 51 at 0.940. All factors are above .4 and very close to 1, meaning they all highly influence the dependent variable.
+
 # Q3: Pick another subscale from FSMI. Test reliability and factor analysis. Answer all the questions  above. 
+
+```{r}
+
+#affiliation (independence) (items 25-30)
+
+#reliability
+
+Alpha(lab9data, "FSMI", 25:30)
+
+```
+#For the affiliation (independence) scale, Cronbach's alpha of .858 is quite high so we can say the scale is internally consistent and its items are interrelated.
+
+```{r}
+#factor analysis and loadings
+
+EFA(lab9data, "FSMI", 25:30, method = "pa", plot.scree = TRUE, nfactors = c("parallel"))
+
+```
+#There's only 1 factor here because the eigenvalue is above 1, its point is on the slope not the the scree/flat part, and it exists above the parallel. The range of the loadings are between .846 and .534. The item with the highest loading is item 30 at .846. All factors are above .4. This means they're all pretty high predictors of variance in the dependent variable. I would exercise caution with interpreting item 27 since it is a bit close to .4. Of all the items, it would be the weakest predictor on the dependent variable.
